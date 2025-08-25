@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Product } from '../../../models/product';
 import { MainButton } from "../../../components/main-button/main-button";
+import { CartService } from '../../../service/cart-service';
 
 @Component({
   selector: 'app-product-card',
@@ -21,6 +22,7 @@ import { MainButton } from "../../../components/main-button/main-button";
         <app-main-button
           class="mt-3"
           label="Add to Cart"
+          (btnClicked)="cartService.addToCart(product())"
         />
       </div>
 
@@ -41,4 +43,5 @@ import { MainButton } from "../../../components/main-button/main-button";
 })
 export class ProductCard {
   product = input.required<Product>();
+  cartService = inject(CartService)
 }
